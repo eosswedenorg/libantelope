@@ -1,4 +1,4 @@
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include <vector>
 #include <doctest.h>
 
@@ -6,9 +6,9 @@ TEST_CASE("ec::ecdsa_recover") {
 
 	struct testcase {
 		const char *name;
-		libeosio::sha256_t dgst;
-		libeosio::ec_signature_t sig;
-		libeosio::ec_pubkey_t expected;
+		libantelope::sha256_t dgst;
+		libantelope::ec_signature_t sig;
+		libantelope::ec_pubkey_t expected;
 		int expectedRet;
 	};
 
@@ -85,19 +85,19 @@ TEST_CASE("ec::ecdsa_recover") {
 		},
 	};
 
-	libeosio::ec_init();
+	libantelope::ec_init();
 
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 		SUBCASE(it->name) {
-			libeosio::ec_pubkey_t result;
+			libantelope::ec_pubkey_t result;
 
-			CHECK( libeosio::ecdsa_recover(&it->dgst, it->sig, result) == it->expectedRet );
+			CHECK( libantelope::ecdsa_recover(&it->dgst, it->sig, result) == it->expectedRet );
 
 			if (it->expectedRet == 0) {
 				CHECK( result == it->expected );
 			}
 		}
 	}
-	libeosio::ec_shutdown();
+	libantelope::ec_shutdown();
 }
 

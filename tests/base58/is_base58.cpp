@@ -1,4 +1,4 @@
-#include <libeosio/base58.hpp>
+#include <libantelope/base58.hpp>
 #include <iostream>
 #include <vector>
 #include <doctest.h>
@@ -23,7 +23,7 @@ TEST_CASE("base58::is_base58 [string]") {
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 
 		SUBCASE(it->name) {
-			CHECK(libeosio::is_base58(it->input) == it->expected);
+			CHECK(libantelope::is_base58(it->input) == it->expected);
 		}
 
 	}
@@ -38,7 +38,7 @@ TEST_CASE("base58::is_base58 [char]") {
 		for(int i = 0; i < valid_alphabet.length(); i++) {
 			char ch = valid_alphabet[i];
 
-			CHECK(libeosio::is_base58(ch));
+			CHECK(libantelope::is_base58(ch));
 		}
 	}
 
@@ -46,7 +46,7 @@ TEST_CASE("base58::is_base58 [char]") {
 		for(int i = 0; i < invalid_alphabet.length(); i++) {
 			char ch = invalid_alphabet[i];
 
-			CHECK_FALSE(libeosio::is_base58(ch));
+			CHECK_FALSE(libantelope::is_base58(ch));
 		}
 	}
 }

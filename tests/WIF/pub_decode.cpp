@@ -1,5 +1,5 @@
-#include <libeosio/WIF.hpp>
-#include <libeosio/ec.hpp>
+#include <libantelope/WIF.hpp>
+#include <libantelope/ec.hpp>
 #include <iostream>
 #include <vector>
 #include <doctest.h>
@@ -8,7 +8,7 @@ TEST_CASE("WIF::wif_pub_decode [legacy]") {
 	struct testcase {
 		const char* name;
 		std::string key;
-		libeosio::ec_pubkey_t expected;
+		libantelope::ec_pubkey_t expected;
 		bool expectedRet;
 	};
 
@@ -24,9 +24,9 @@ TEST_CASE("WIF::wif_pub_decode [legacy]") {
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 
 		SUBCASE(it->name) {
-			libeosio::ec_pubkey_t result = { 0x0 };
+			libantelope::ec_pubkey_t result = { 0x0 };
 
-			CHECK( libeosio::wif_pub_decode(result, it->key) == it->expectedRet );
+			CHECK( libantelope::wif_pub_decode(result, it->key) == it->expectedRet );
 			CHECK( result == it->expected );
 		}
 	}
@@ -36,7 +36,7 @@ TEST_CASE("WIF::wif_pub_decode [k1]") {
 	struct testcase {
 		const char* name;
 		std::string key;
-		libeosio::ec_pubkey_t expected;
+		libantelope::ec_pubkey_t expected;
 		bool expectedRet;
 	};
 
@@ -52,9 +52,9 @@ TEST_CASE("WIF::wif_pub_decode [k1]") {
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 
 		SUBCASE(it->name) {
-			libeosio::ec_pubkey_t result = { 0x0 };
+			libantelope::ec_pubkey_t result = { 0x0 };
 
-			CHECK( libeosio::wif_pub_decode(result, it->key) == it->expectedRet );
+			CHECK( libantelope::wif_pub_decode(result, it->key) == it->expectedRet );
 			CHECK( result == it->expected );
 		}
 	}

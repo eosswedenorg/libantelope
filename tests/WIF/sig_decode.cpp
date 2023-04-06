@@ -1,5 +1,5 @@
-#include <libeosio/WIF.hpp>
-#include <libeosio/ec.hpp>
+#include <libantelope/WIF.hpp>
+#include <libantelope/ec.hpp>
 #include <vector>
 #include <doctest.h>
 
@@ -8,7 +8,7 @@ TEST_CASE("WIF::wif_sig_decode") {
 	struct testcase {
 		const char *name;
 		std::string input;
-		libeosio::ec_signature_t expected;
+		libantelope::ec_signature_t expected;
 		bool expectedRet;
 	};
 
@@ -87,9 +87,9 @@ TEST_CASE("WIF::wif_sig_decode") {
 
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 		SUBCASE(it->name) {
-			libeosio::ec_signature_t result;
+			libantelope::ec_signature_t result;
 
-			CHECK( libeosio::wif_sig_decode(result, it->input) == it->expectedRet );
+			CHECK( libantelope::wif_sig_decode(result, it->input) == it->expectedRet );
 
 			if (it->expectedRet == true) {
 				CHECK( result == it->expected );

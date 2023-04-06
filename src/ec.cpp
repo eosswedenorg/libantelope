@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 
 std::ostream& _hex(std::ostream& os, const unsigned char *b, std::size_t sz) {
 	os << "[ " << std::hex;
@@ -38,10 +38,10 @@ std::ostream& _hex(std::ostream& os, const unsigned char *b, std::size_t sz) {
 	return os << std::oct << " ]";
 }
 
-std::ostream& operator<<(std::ostream& os, const libeosio::ec_privkey_t& k) {
+std::ostream& operator<<(std::ostream& os, const libantelope::ec_privkey_t& k) {
 	return _hex(os, k.data(), k.size());
 }
 
-std::ostream& operator<<(std::ostream& os, const libeosio::ec_pubkey_t& k) {
+std::ostream& operator<<(std::ostream& os, const libantelope::ec_pubkey_t& k) {
 	return _hex(os, k.data(), k.size());
 }

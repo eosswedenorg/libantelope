@@ -1,5 +1,5 @@
-#include <libeosio/ec.hpp>
-#include <libeosio/WIF.hpp>
+#include <libantelope/ec.hpp>
+#include <libantelope/WIF.hpp>
 #include <vector>
 #include <doctest.h>
 
@@ -8,8 +8,8 @@ TEST_CASE("ec::pubkey") {
 
 	struct testcase {
 		std::string name;
-		libeosio::ec_privkey_t priv;
-		libeosio::ec_pubkey_t expected;
+		libantelope::ec_privkey_t priv;
+		libantelope::ec_pubkey_t expected;
 	};
 
 	std::vector<struct testcase> tests {
@@ -125,16 +125,16 @@ TEST_CASE("ec::pubkey") {
 		}
 	};
 
-	libeosio::ec_init();
+	libantelope::ec_init();
 
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 
 		SUBCASE(it->name.c_str()) {
-			libeosio::ec_pubkey_t result;
-			CHECK( libeosio::ec_get_publickey(&it->priv, &result) == 0 );
+			libantelope::ec_pubkey_t result;
+			CHECK( libantelope::ec_get_publickey(&it->priv, &result) == 0 );
 			CHECK( result == it->expected );
 		}
 	}
 
-	libeosio::ec_shutdown();
+	libantelope::ec_shutdown();
 }

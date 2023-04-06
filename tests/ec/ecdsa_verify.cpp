@@ -1,4 +1,4 @@
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include <vector>
 #include <doctest.h>
 
@@ -6,9 +6,9 @@ TEST_CASE("ec::ecdsa_verify") {
 
 	struct testcase {
 		const char *name;
-		libeosio::sha256_t dgst;
-		libeosio::ec_pubkey_t pubkey;
-		libeosio::ec_signature_t sig;
+		libantelope::sha256_t dgst;
+		libantelope::ec_pubkey_t pubkey;
+		libantelope::ec_signature_t sig;
 		int expected;
 	};
 
@@ -176,14 +176,14 @@ TEST_CASE("ec::ecdsa_verify") {
 		},
 	};
 
-	libeosio::ec_init();
+	libantelope::ec_init();
 
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 		SUBCASE(it->name) {
-			CHECK( libeosio::ecdsa_verify(&it->dgst, it->sig, it->pubkey) == it->expected );
+			CHECK( libantelope::ecdsa_verify(&it->dgst, it->sig, it->pubkey) == it->expected );
 		}
 	}
 
-	libeosio::ec_shutdown();
+	libantelope::ec_shutdown();
 }
 

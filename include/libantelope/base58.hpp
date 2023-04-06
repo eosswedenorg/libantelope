@@ -21,40 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_HASH_H
-#define LIBEOSIO_HASH_H
+#ifndef LIBANTELOPE_BASE58_H
+#define LIBANTELOPE_BASE58_H
 
-#include <cstddef>
+#include <string>
+#include <vector>
 
-namespace libeosio {
-
-/**
- * Hashes
- */
-typedef unsigned char ripemd160_t[20];
-typedef unsigned char sha256_t[32];
+namespace libantelope {
 
 /**
- * sha256 hashing function.
- * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
- * Returns the same pointer as `out`.
+ * Base58 Encoding functions.
  */
-sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out);
+std::string base58_encode(const std::string& str);
+std::string base58_encode(const std::vector<unsigned char>& vch);
+std::string base58_encode(const unsigned char* pbegin, const unsigned char* pend);
+
 
 /**
- * sha256 double hashing function.
- * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
- * Returns the same pointer as `out`.
+ * Base58 Decoding functions.
  */
-sha256_t* sha256d(const unsigned char *data, std::size_t len, sha256_t* out);
+bool base58_decode(const char* psz, std::vector<unsigned char>& out);
+bool base58_decode(const std::string& str, std::vector<unsigned char>& out);
 
 /**
- * RipeMD160 hashing function.
- * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
- * Returns the same pointer as `out`.
+ * Returns true if `ch` is a base58 character, false otherwise.
  */
-ripemd160_t* ripemd160(const unsigned char *data, std::size_t len, ripemd160_t* out);
+bool is_base58(char ch);
 
-} // namespace libeosio
+/**
+ * Returns std::string::npos if the string contains only base58 characters
+ * Otherwise the position of the first non base58 character is returned.
+ */
+size_t is_base58(const std::string& str);
 
-#endif /* LIBEOSIO_HASH_H */
+/**
+ * Strips all non-base58 characters from `str`.
+ * The string is modified in place and the same string is
+ * returned without non-base58 chars.
+ */
+std::string& base58_strip(std::string& str);
+
+} //namespace libantelope
+
+#endif /* LIBANTELOPE_BASE58_H */

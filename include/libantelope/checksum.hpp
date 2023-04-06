@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_CHECKSUM_H
-#define LIBEOSIO_CHECKSUM_H
+#ifndef LIBANTELOPE_CHECKSUM_H
+#define LIBANTELOPE_CHECKSUM_H
 
 #include <cstdint>
 #include <cstring>
-#include <libeosio/hash.hpp>
+#include <libantelope/hash.hpp>
 
-namespace libeosio {
+namespace libantelope {
 
 /**
  * Checksum size (in bytes)
@@ -68,6 +68,6 @@ inline bool checksum_validate(const unsigned char* data, std::size_t len) {
 #define checksum_sha256d checksum<sha256_t, sha256d>
 #define checksum_ripemd160 checksum<ripemd160_t, ripemd160>
 
-} // namespace libeosio
+} // namespace libantelope
 
-#endif /* LIBEOSIO_CHECKSUM_H */
+#endif /* LIBANTELOPE_CHECKSUM_H */

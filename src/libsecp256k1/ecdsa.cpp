@@ -23,10 +23,10 @@
  */
 #include <secp256k1.h>
 #include <secp256k1_recovery.h>
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include "rng.h"
 
-namespace libeosio {
+namespace libantelope {
 
 extern secp256k1_context* ctx;
 
@@ -115,4 +115,4 @@ int ecdsa_recover(const sha256_t* digest, const ec_signature_t& sig, ec_pubkey_t
 	return len != EC_PUBKEY_SIZE ? -1 : 0;
 }
 
-} // namespace libeosio
+} // namespace libantelope

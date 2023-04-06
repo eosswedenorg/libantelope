@@ -24,10 +24,10 @@
 #include <openssl/ec.h>
 #include <openssl/bn.h>
 #include <openssl/ecdsa.h>
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include "internal.h"
 
-namespace libeosio {
+namespace libantelope {
 
 extern BN_CTX *ctx;
 
@@ -182,4 +182,4 @@ err2:   EC_KEY_free(ec_key);
 err1:	return ret;
 }
 
-} // namespace libeosio
+} // namespace libantelope

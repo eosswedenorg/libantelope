@@ -24,10 +24,10 @@
 #include <openssl/ec.h>
 #include <openssl/bn.h>
 #include <openssl/hmac.h>
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include "internal.h"
 
-namespace libeosio {
+namespace libantelope {
 
 BN_CTX *ctx = NULL;
 EC_KEY *k = NULL;
@@ -121,4 +121,4 @@ int ec_generate_key(struct ec_keypair *pair) {
 	return 0;
 }
 
-} // namespace libeosio
+} // namespace libantelope

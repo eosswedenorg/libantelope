@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_WIF_H
-#define LIBEOSIO_WIF_H
+#ifndef LIBANTELOPE_WIF_H
+#define LIBANTELOPE_WIF_H
 
 #include <string>
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 
-namespace libeosio {
+namespace libantelope {
 
 /**
  * Key prefixes. (strings that is not equal to these prefixes are treated as legacy format.)
@@ -94,6 +94,6 @@ std::string wif_sig_encode(const ec_signature_t& sig);
  */
 bool wif_sig_decode(ec_signature_t& sig, const std::string& data);
 
-} // namespace libeosio
+} // namespace libantelope
 
-#endif /* LIBEOSIO_WIF_H */
+#endif /* LIBANTELOPE_WIF_H */

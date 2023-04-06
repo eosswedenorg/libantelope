@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-#include <libeosio/checksum.hpp>
+#include <libantelope/checksum.hpp>
 #include <vector>
 #include "codec.hpp"
 
-namespace libeosio { namespace internal {
+namespace libantelope { namespace internal {
 
 // Just to make it "harder" the calculated checksum for a signature (k1) and pub/priv keys in k1/r1 format.
 // has a suffix that is not present in the WIF encoded string.
@@ -125,4 +125,4 @@ bool sig_decoder_k1(const std::vector<unsigned char>& buf, ec_signature_t& sig) 
 }
 
 
-}} // namespace libeosio::internal
+}} // namespace libantelope::internal

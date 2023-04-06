@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 #include <chrono>
-#include <libeosio/ec.hpp>
-#include <libeosio/WIF.hpp>
+#include <libantelope/ec.hpp>
+#include <libantelope/WIF.hpp>
 
 
 std::chrono::duration<float> _run(size_t num_keys) {
 	auto start = std::chrono::steady_clock::now();
 	for(size_t i = 0; i < num_keys; i++) {
-		struct libeosio::ec_keypair k;
-		libeosio::ec_generate_key(&k);
+		struct libantelope::ec_keypair k;
+		libantelope::ec_generate_key(&k);
 	}
 	return std::chrono::steady_clock::now() - start;
 }
@@ -48,13 +48,13 @@ void test(size_t num_keys) {
 }
 
 int main() {
-	libeosio::ec_init();
+	libantelope::ec_init();
 
 	test(1000);
 	test(10000);
 	test(100000);
 
-	libeosio::ec_shutdown();
+	libantelope::ec_shutdown();
 
 	return 0;
 }

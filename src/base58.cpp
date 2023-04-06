@@ -28,9 +28,9 @@
 #include <cstddef>
 #include <cassert>
 #include <cstring>
-#include <libeosio/base58.hpp>
+#include <libantelope/base58.hpp>
 
-namespace libeosio {
+namespace libantelope {
 
 static const char charmap[59] = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 static const int8_t table[256] = {
@@ -190,4 +190,4 @@ std::string& base58_strip(std::string &str) {
     return str;
 }
 
-} // namespace libeosio
+} // namespace libantelope

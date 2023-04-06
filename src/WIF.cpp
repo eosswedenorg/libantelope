@@ -23,12 +23,12 @@
  */
 #include <iostream>
 #include <cstring>
-#include <libeosio/base58.hpp>
-#include <libeosio/checksum.hpp>
-#include <libeosio/WIF.hpp>
+#include <libantelope/base58.hpp>
+#include <libantelope/checksum.hpp>
+#include <libantelope/WIF.hpp>
 #include "wif/codec.hpp"
 
-namespace libeosio {
+namespace libantelope {
 
 const std::string WIF_PUB_LEG = "EOS";
 const std::string WIF_PUB_K1  = "PUB_K1_";
@@ -154,4 +154,4 @@ std::string wif_sig_encode(const ec_signature_t& sig) {
 	return WIF_SIG_K1 + base58_encode(buf, buf + sizeof(buf));
 }
 
-} // namespace libeosio
+} // namespace libantelope

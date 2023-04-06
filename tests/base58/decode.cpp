@@ -1,4 +1,4 @@
-#include <libeosio/base58.hpp>
+#include <libantelope/base58.hpp>
 #include <iostream>
 #include <vector>
 #include <doctest.h>
@@ -41,7 +41,7 @@ TEST_CASE("base58_decode") {
 
 			std::vector<unsigned char> expectedOut(it->expectedOut.begin(), it->expectedOut.end());
 
-			CHECK( libeosio::base58_decode(it->in, result) == it->expectedReturn );
+			CHECK( libantelope::base58_decode(it->in, result) == it->expectedReturn );
 			CHECK( result == expectedOut );
 		}
 	}

@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_CODEC_H
-#define LIBEOSIO_CODEC_H
+#ifndef LIBANTELOPE_CODEC_H
+#define LIBANTELOPE_CODEC_H
 
-#include <libeosio/WIF.hpp>
+#include <libantelope/WIF.hpp>
 #include <vector>
 
-namespace libeosio { namespace internal {
+namespace libantelope { namespace internal {
 
 /**
  * Public-key encoders
@@ -79,6 +79,6 @@ typedef bool (*sig_decoder_t)(const std::vector<unsigned char>& buf, ec_signatur
 
 bool sig_decoder_k1(const std::vector<unsigned char>& buf, ec_signature_t& sig);
 
-}} // namespace libeosio::internal
+}} // namespace libantelope::internal
 
-#endif /* LIBEOSIO_CODEC_H */
+#endif /* LIBANTELOPE_CODEC_H */

@@ -23,10 +23,10 @@
  */
 #include <secp256k1.h>
 #include <secp256k1_ecdh.h>
-#include <libeosio/ec.hpp>
+#include <libantelope/ec.hpp>
 #include "rng.h"
 
-namespace libeosio {
+namespace libantelope {
 
 secp256k1_context* ctx;
 
@@ -90,4 +90,4 @@ int ec_generate_key(struct ec_keypair *pair) {
 	return ec_get_publickey(&pair->secret, &pair->pub);
 }
 
-} // namespace libeosio
+} // namespace libantelope

@@ -24,8 +24,8 @@
 #include <openssl/ec.h>
 #include <openssl/hmac.h>
 
-#ifndef LIBEOSIO_OPENSSL_INTERNAL_H
-#define LIBEOSIO_OPENSSL_INTERNAL_H
+#ifndef LIBANTELOPE_OPENSSL_INTERNAL_H
+#define LIBANTELOPE_OPENSSL_INTERNAL_H
 
 #define EC_KEY_new_secp256k1() (EC_KEY_new_by_curve_name( NID_secp256k1 ))
 
@@ -62,4 +62,4 @@ int ECDSA_SIG_unserialize_rs(const unsigned char *sig, BIGNUM **r, BIGNUM **s, i
 }
 #endif
 
-#endif /* LIBEOSIO_OPENSSL_INTERNAL_H */
+#endif /* LIBANTELOPE_OPENSSL_INTERNAL_H */

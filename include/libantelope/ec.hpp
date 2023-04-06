@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_EC_H
-#define LIBEOSIO_EC_H
+#ifndef LIBANTELOPE_EC_H
+#define LIBANTELOPE_EC_H
 
-#include <libeosio/hash.hpp>
+#include <libantelope/hash.hpp>
 #include <iostream>
 #include <array>
 
-namespace libeosio {
+namespace libantelope {
 
 /**
  * Elliptic curve private key size (in bytes)
@@ -128,13 +128,13 @@ int ecdsa_recover(const sha256_t* digest, const ec_signature_t& sig, ec_pubkey_t
  */
 void ec_shutdown();
 
-} // namespace libeosio
+} // namespace libantelope
 
 
 // Stream operators
 
-std::ostream& operator<<(std::ostream& os, const libeosio::ec_privkey_t& pk);
+std::ostream& operator<<(std::ostream& os, const libantelope::ec_privkey_t& pk);
 
-std::ostream& operator<<(std::ostream& os, const libeosio::ec_pubkey_t& pk);
+std::ostream& operator<<(std::ostream& os, const libantelope::ec_pubkey_t& pk);
 
-#endif /* LIBEOSIO_EC_H */
+#endif /* LIBANTELOPE_EC_H */

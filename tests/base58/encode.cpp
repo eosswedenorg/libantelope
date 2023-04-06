@@ -1,4 +1,4 @@
-#include <libeosio/base58.hpp>
+#include <libantelope/base58.hpp>
 #include <iostream>
 #include <vector>
 #include <doctest.h>
@@ -28,7 +28,7 @@ TEST_CASE("base58::base58_encode") {
 	for(auto it = tests.begin(); it != tests.end(); it++) {
 
 		SUBCASE(it->name) {
-			CHECK( libeosio::base58_encode(it->in) == it->expected );
+			CHECK( libantelope::base58_encode(it->in) == it->expected );
 		}
 	}
 }

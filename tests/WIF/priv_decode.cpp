@@ -1,5 +1,5 @@
-#include <libeosio/WIF.hpp>
-#include <libeosio/ec.hpp>
+#include <libantelope/WIF.hpp>
+#include <libantelope/ec.hpp>
 #include <iostream>
 #include <vector>
 #include <doctest.h>
@@ -8,7 +8,7 @@ TEST_CASE("WIF::wif_priv_decode [legacy]") {
 	struct testcase {
 		std::string name;
 		std::string key;
-		libeosio::ec_privkey_t expected;
+		libantelope::ec_privkey_t expected;
 	};
 
 
@@ -22,9 +22,9 @@ TEST_CASE("WIF::wif_priv_decode [legacy]") {
 
 		SUBCASE(it->name.c_str()) {
 
-			libeosio::ec_privkey_t result;
+			libantelope::ec_privkey_t result;
 
-			CHECK( libeosio::wif_priv_decode(result, it->key) );
+			CHECK( libantelope::wif_priv_decode(result, it->key) );
 			CHECK( result == it->expected );
 		}
 	}
@@ -35,7 +35,7 @@ TEST_CASE("WIF::wif_priv_decode [K1]") {
 	struct testcase {
 		std::string name;
 		std::string key;
-		libeosio::ec_privkey_t expected;
+		libantelope::ec_privkey_t expected;
 	};
 
 
@@ -49,9 +49,9 @@ TEST_CASE("WIF::wif_priv_decode [K1]") {
 
 		SUBCASE(it->name.c_str()) {
 
-			libeosio::ec_privkey_t result;
+			libantelope::ec_privkey_t result;
 
-			CHECK( libeosio::wif_priv_decode(result, it->key) );
+			CHECK( libantelope::wif_priv_decode(result, it->key) );
 			CHECK( result == it->expected );
 		}
 	}

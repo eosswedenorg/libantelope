@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-#include <libeosio/checksum.hpp>
+#include <libantelope/checksum.hpp>
 #include "codec.hpp"
 
-namespace libeosio { namespace internal {
+namespace libantelope { namespace internal {
 
 #define PRIV_KEY_PREFIX 0x80 /* 0x80 for "Bitcoin mainnet". Always used by EOS. */
 
@@ -77,4 +77,4 @@ bool priv_decoder_legacy(const std::vector<unsigned char>& buf, ec_privkey_t& pr
 	return true;
 }
 
-}} // namespace libeosio::internal
+}} // namespace libantelope::internal

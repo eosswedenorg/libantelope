@@ -21,46 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#ifndef LIBEOSIO_BASE58_H
-#define LIBEOSIO_BASE58_H
+#ifndef LIBANTELOPE_HASH_H
+#define LIBANTELOPE_HASH_H
 
-#include <string>
-#include <vector>
+#include <cstddef>
 
-namespace libeosio {
-
-/**
- * Base58 Encoding functions.
- */
-std::string base58_encode(const std::string& str);
-std::string base58_encode(const std::vector<unsigned char>& vch);
-std::string base58_encode(const unsigned char* pbegin, const unsigned char* pend);
-
+namespace libantelope {
 
 /**
- * Base58 Decoding functions.
+ * Hashes
  */
-bool base58_decode(const char* psz, std::vector<unsigned char>& out);
-bool base58_decode(const std::string& str, std::vector<unsigned char>& out);
+typedef unsigned char ripemd160_t[20];
+typedef unsigned char sha256_t[32];
 
 /**
- * Returns true if `ch` is a base58 character, false otherwise.
+ * sha256 hashing function.
+ * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
+ * Returns the same pointer as `out`.
  */
-bool is_base58(char ch);
+sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out);
 
 /**
- * Returns std::string::npos if the string contains only base58 characters
- * Otherwise the position of the first non base58 character is returned.
+ * sha256 double hashing function.
+ * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
+ * Returns the same pointer as `out`.
  */
-size_t is_base58(const std::string& str);
+sha256_t* sha256d(const unsigned char *data, std::size_t len, sha256_t* out);
 
 /**
- * Strips all non-base58 characters from `str`.
- * The string is modified in place and the same string is
- * returned without non-base58 chars.
+ * RipeMD160 hashing function.
+ * Hashes the content in `data` up to `len` bytes. The result is stored in `out`.
+ * Returns the same pointer as `out`.
  */
-std::string& base58_strip(std::string& str);
+ripemd160_t* ripemd160(const unsigned char *data, std::size_t len, ripemd160_t* out);
 
-} //namespace libeosio
+} // namespace libantelope
 
-#endif /* LIBEOSIO_BASE58_H */
+#endif /* LIBANTELOPE_HASH_H */

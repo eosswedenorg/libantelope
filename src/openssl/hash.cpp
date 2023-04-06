@@ -23,9 +23,9 @@
  */
 #include <openssl/sha.h>
 #include <openssl/ripemd.h>
-#include <libeosio/hash.hpp>
+#include <libantelope/hash.hpp>
 
-namespace libeosio {
+namespace libantelope {
 
 sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out) {
 	return (sha256_t *) SHA256(data, len, (unsigned char*) out);
@@ -40,4 +40,4 @@ ripemd160_t* ripemd160(const unsigned char *data, std::size_t len, ripemd160_t* 
 	return (ripemd160_t *) RIPEMD160(data, len, (unsigned char*) out);
 }
 
-} // namespace libeosio
+} // namespace libantelope
