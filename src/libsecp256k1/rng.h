@@ -4,6 +4,9 @@
  * EXAMPLES_COPYING or https://creativecommons.org/publicdomain/zero/1.0 *
  *************************************************************************/
 
+#ifndef LIBANTELOPE_LIBSECP256K1_RNG_H
+#define LIBANTELOPE_LIBSECP256K1_RNG_H
+
 /*
  * This file is an attempt at collecting best practice methods for obtaining randomness with different operating systems.
  * It may be out-of-date. Consult the documentation of the operating system before considering to use the methods below.
@@ -65,3 +68,5 @@ static int fill_random(unsigned char* data, size_t size) {
 #endif
     return 0;
 }
+
+#endif /* LIBANTELOPE_LIBSECP256K1_RNG_H */
