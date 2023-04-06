@@ -8,7 +8,7 @@
 #   find_package(libantelope 0.1) 		# any 0.1.x, but the library is optional.
 #	find_package(libeantelope 0.1.0) 	# 0.1.0 or greater, but the library is optional.
 #
-# Then you just link the you target with eoskeygen target:
+# Then you just link the you target with libantelope target:
 #
 # 	target_link_libraries( ${PROGRAM_EXE} PUBLIC libantelope )
 #
