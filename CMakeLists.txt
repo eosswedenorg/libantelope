@@ -5,10 +5,10 @@ cmake_minimum_required(VERSION 3.15)
 # --------------------------------
 
 # Project name and version
-project(libeosio
+project(libantelope
 	VERSION 0.1.7
-	DESCRIPTION "C++ library for EOSIO"
-	HOMEPAGE_URL "https://github.com/eosswedenorg/libeosio"
+	DESCRIPTION "C++ library for Antelope IO"
+	HOMEPAGE_URL "https://github.com/eosswedenorg/libantelope"
 	LANGUAGES C CXX
 )
 

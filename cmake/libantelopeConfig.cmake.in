@@ -1,0 +1,26 @@
+#  This script provides the libantelope as an import target
+# ----------------------------------------------------------
+#
+# Use find_package() so cmake will find libantelope:
+#
+#   find_package(libantelope)			# No specific version
+# 	find_package(libantelope REQUIRED) # No specific version, but the library must be found.
+#   find_package(libantelope 0.1) 		# any 0.1.x, but the library is optional.
+#	find_package(libeantelope 0.1.0) 	# 0.1.0 or greater, but the library is optional.
+#
+# Then you just link the you target with eoskeygen target:
+#
+# 	target_link_libraries( ${PROGRAM_EXE} PUBLIC libantelope )
+#
+# if you do not specify REQUIRED. you must check the variable libantelope_FOUND
+# and and only link to it if it's defined:
+#
+#	if (libantelope_FOUND)
+#   	...
+#		target_link_libraries( ${PROGRAM_EXE} PUBLIC libantelope )
+#		..
+#	endif()
+
+set(LIBANTELOPE_VERSION "@PROJECT_VERSION@")
+
+include ( "${CMAKE_CURRENT_LIST_DIR}/@PROJECT_NAME@Targets.cmake" )

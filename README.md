@@ -1,12 +1,12 @@
-![](https://github.com/eosswedenorg/libeosio/workflows/CI/badge.svg)
-[![GitHub release](https://img.shields.io/github/v/release/eosswedenorg/libeosio?include_prereleases)](https://github.com/eosswedenorg/libeosio/releases/latest)
+![](https://github.com/eosswedenorg/libantelope/workflows/CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/v/release/eosswedenorg/libleap?include_prereleases)](https://github.com/eosswedenorg/libantelope/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# libeosio
+# libleap
 
-Independent C++ library for [EOS](https://eos.io/)
+Independent C++ library for [Antelope IO](https://antelope.io) (former [libeosio](https://github.com/eosswedenorg/libeosio))
 
-NOTE: This repository has no connection to the official EOS code.
+NOTE: This repository has no connection to the official Antelope code.
 
 ## Compiling the library
 
@@ -110,7 +110,7 @@ C:\repo> cmake --build build --config Release
 ## Security notice
 
 Elliptic curve crypthographic operations is done using either `OpenSSL` or `libsecp256k1` libraries.
-This library (libeosio) will never expose sensitve cryptographic information
+This library (libleap) will never expose sensitve cryptographic information
 to anything but the computers memory.
 You are free to inspect the source code and compile yourself to verify.
 
