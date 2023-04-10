@@ -56,7 +56,7 @@ int ecdsa_sign(const ec_privkey_t& key, const sha256_t* digest, ec_signature_t& 
 		secp256k1_ecdsa_recoverable_signature_serialize_compact(ctx, sig.data() + 1, &v, &s);
 
 		if (is_canonical(sig.data())) {
-			sig[0] = 27 + 4 + v;
+			sig[0] = (unsigned char) (27 + 4 + v);
 			return 0;
 		}
 	}
