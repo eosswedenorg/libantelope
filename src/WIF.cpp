@@ -41,7 +41,6 @@ const wif_codec_t WIF_CODEC_LEG = wif_create_legacy_codec(WIF_PUB_LEG);
 
 std::string wif_priv_encode(const ec_privkey_t& priv, const std::string& prefix) {
 
-	checksum_t check;
 	// 1 byte extra for legacy prefix prefix.
 	unsigned char buf[1 + EC_PRIVKEY_SIZE + CHECKSUM_SIZE] = { 0 };
 	size_t len;
@@ -131,7 +130,6 @@ void wif_print_key(const struct ec_keypair *key, const wif_codec_t& codec) {
 
 bool wif_sig_decode(ec_signature_t& sig, const std::string& data) {
 
-	checksum_t checksum;
 	std::vector<unsigned char> buf;
 
 	if (data.substr(0, WIF_SIG_K1.length()) != WIF_SIG_K1) {
