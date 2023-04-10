@@ -58,7 +58,7 @@ std::string wif_priv_encode(const ec_privkey_t& priv, const std::string& prefix)
 
 bool wif_priv_decode(ec_privkey_t& priv, const std::string& data) {
 
-	uint8_t offset;
+	std::size_t offset;
 	std::vector<unsigned char> buf;
 	internal::priv_decoder_t decoder = internal::priv_decoder_legacy;
 
@@ -99,7 +99,7 @@ std::string wif_pub_encode(const ec_pubkey_t& pub, const std::string& prefix) {
 bool wif_pub_decode(ec_pubkey_t& pub, const std::string& data) {
 
 	internal::pub_decoder_t decoder = internal::pub_decoder_legacy;
-	int offset;
+	std::size_t offset;
 	std::vector<unsigned char> buf;
 
 	// Check prefix
