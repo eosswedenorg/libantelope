@@ -39,6 +39,7 @@ int is_canonical(const unsigned char *d) {
 static int extended_nonce_function( unsigned char *nonce32, const unsigned char *msg32,
                                         const unsigned char *key32, const unsigned char* algo16,
                                         void* data, unsigned int attempt ) {
+	(void)attempt; // "use" the variable here to shutup compiler about unsed variable.
 	return secp256k1_nonce_function_rfc6979(nonce32, msg32, key32, algo16, nullptr, *(unsigned int*) data);
 }
 
