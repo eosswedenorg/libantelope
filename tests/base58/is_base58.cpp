@@ -35,7 +35,7 @@ TEST_CASE("base58::is_base58 [char]") {
 
 	SUBCASE("valid") {
 
-		for(int i = 0; i < valid_alphabet.length(); i++) {
+		for(std::size_t i = 0; i < valid_alphabet.length(); i++) {
 			char ch = valid_alphabet[i];
 
 			CHECK(libantelope::is_base58(ch));
@@ -43,7 +43,7 @@ TEST_CASE("base58::is_base58 [char]") {
 	}
 
 	SUBCASE("invalid") {
-		for(int i = 0; i < invalid_alphabet.length(); i++) {
+		for(std::size_t i = 0; i < invalid_alphabet.length(); i++) {
 			char ch = invalid_alphabet[i];
 
 			CHECK_FALSE(libantelope::is_base58(ch));
