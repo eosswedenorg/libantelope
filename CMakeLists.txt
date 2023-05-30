@@ -79,6 +79,7 @@ add_library( ${LIB_NAME} STATIC
 target_include_directories( ${LIB_NAME}
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
+		$<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
 		$<INSTALL_INTERFACE:include>
 )
 
@@ -124,6 +125,9 @@ endif()
 
 message("-- Using Elliptic curve library: ${EC_LIB}")
 
+# Generate config file
+configure_file(src/config.in.h ${CMAKE_BINARY_DIR}/include/libantelope/config.h)
+
 # --------------------------------
 #  Tests
 # --------------------------------
@@ -160,7 +164,7 @@ install(TARGETS ${LIB_NAME} EXPORT ${PROJECT_NAME}Targets
 	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 	RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include/ ${CMAKE_BINARY_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 # Readme and license
 install(FILES README.md LICENSE LICENSE.bitcoin
