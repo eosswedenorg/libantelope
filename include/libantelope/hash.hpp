@@ -25,6 +25,7 @@
 #define LIBANTELOPE_HASH_H
 
 #include <cstddef>
+#include <libantelope/internal/hash.hpp>
 
 namespace libantelope {
 
@@ -33,6 +34,26 @@ namespace libantelope {
  */
 typedef unsigned char ripemd160_t[20];
 typedef unsigned char sha256_t[32];
+
+typedef internal::sha256_state sha256_ctx_t;
+typedef internal::ripemd160_state ripemd160_ctx_t;
+
+/**
+ * Initialize a sha256_ctx_t structure
+ */
+int sha256_init(sha256_ctx_t* ctx);
+
+/**
+ * Update the sha256 hash value with the contents in `data` up to `len` bytes.
+ * This can be called repeatedly to hash chunks of data.
+ */
+int sha256_update(sha256_ctx_t* ctx, const void *data, std::size_t len);
+
+/**
+ * Place the message digest in out variable.
+ * The ctx's internal state is reset after this operation.
+ */
+int sha256_final(sha256_ctx_t* ctx, sha256_t* out);
 
 /**
  * sha256 hashing function.
@@ -47,6 +68,23 @@ sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out);
  * Returns the same pointer as `out`.
  */
 sha256_t* sha256d(const unsigned char *data, std::size_t len, sha256_t* out);
+
+/**
+ * Initialize a ripmemd160_ctx_t structure
+ */
+int ripemd160_init(ripemd160_ctx_t* ctx);
+
+/**
+ * Update the RipeMD160 hash value with the contents in `data` up to `len` bytes.
+ * This can be called repeatedly to hash chunks of data.
+ */
+int ripemd160_update(ripemd160_ctx_t* ctx, const void *data, std::size_t len);
+
+/**
+ * Places the RipeMD160 message digest in out variable.
+ * The ctx's internal state is reset after this operation.
+ */
+int ripemd160_final(ripemd160_ctx_t* ctx, ripemd160_t* out);
 
 /**
  * RipeMD160 hashing function.

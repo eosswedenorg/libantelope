@@ -27,6 +27,18 @@
 
 namespace libantelope {
 
+int sha256_init(struct sha256_ctx* ctx) {
+	return SHA256_Init((SHA256_CTX*)ctx);
+}
+
+int sha256_update(sha256_ctx_t* ctx, const void *data, std::size_t len) {
+	return SHA256_Update((SHA256_CTX*)ctx, data, len);
+}
+
+int sha256_final(sha256_ctx_t* ctx, sha256_t* out) {
+	return SHA256_Final((unsigned char*) out, (SHA256_CTX*)ctx);
+}
+
 sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out) {
 	return (sha256_t *) SHA256(data, len, (unsigned char*) out);
 }
@@ -34,6 +46,18 @@ sha256_t* sha256(const unsigned char *data, std::size_t len, sha256_t* out) {
 sha256_t* sha256d(const unsigned char *data, std::size_t len, sha256_t* out) {
 	SHA256(data, len, (unsigned char*) out);
 	return (sha256_t *) SHA256((unsigned char*) out, 32, (unsigned char*) out);
+}
+
+int ripemd160_init(ripemd160_ctx_t* ctx) {
+	return RIPEMD160_Init((RIPEMD160_CTX*)ctx);
+}
+
+int ripemd160_update(ripemd160_ctx_t* ctx, const void *data, std::size_t len) {
+	return RIPEMD160_Update((RIPEMD160_CTX*)ctx, data, len);
+}
+
+int ripemd160_final(ripemd160_ctx_t* ctx, ripemd160_t* out) {
+	return RIPEMD160_Final((unsigned char*) out, (RIPEMD160_CTX*)ctx);
 }
 
 ripemd160_t* ripemd160(const unsigned char *data, std::size_t len, ripemd160_t* out) {
