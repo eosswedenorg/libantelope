@@ -23,7 +23,7 @@
  */
 
 #include <libantelope/checksum.hpp>
-#include <vector>
+#include <libantelope/hash/ripemd160.hpp>
 #include "codec.hpp"
 
 namespace libantelope { namespace internal {
@@ -31,22 +31,23 @@ namespace libantelope { namespace internal {
 // Just to make it "harder" the calculated checksum for a signature (k1) and pub/priv keys in k1/r1 format.
 // has a suffix that is not present in the WIF encoded string.
 // So this function is a quick hack to calculate it.
-//
-// Should implement and use Init/Update/Finalize hash functions to do it inplace.
-void _checksum_suffix(const unsigned char *in, size_t size, const char *suffix, checksum_t check) {
-	std::vector<unsigned char> buf(size + 2);
+void _checksum_suffix(const unsigned char *in, size_t size, checksum_t check) {
+	ripemd160_ctx_t ctx;
+	ripemd160_t md;
 
-	memcpy(buf.data(), in, size);
-	memcpy(buf.data() + size, suffix, 2);
+	ripemd160_init(&ctx);
+	ripemd160_update(&ctx, in, size);
+	ripemd160_update(&ctx, "K1", 2);
+	ripemd160_final(&ctx, &md);
 
-	return checksum_ripemd160(buf.data(), buf.size(), (unsigned char*) check);
+	std::memcpy(check, md, CHECKSUM_SIZE);
 }
 
 void pub_encoder_k1(const ec_pubkey_t& key, unsigned char *buf) {
 
 	checksum_t check;
 
-	_checksum_suffix(key.data(), EC_PUBKEY_SIZE, "K1", check);
+	_checksum_suffix(key.data(), EC_PUBKEY_SIZE, check);
 
 	memcpy(buf, key.data(), EC_PUBKEY_SIZE);
 	memcpy(buf + EC_PUBKEY_SIZE, check, CHECKSUM_SIZE);
@@ -56,7 +57,7 @@ bool pub_decoder_k1(const std::vector<unsigned char>& buf, ec_pubkey_t& key) {
 
 	checksum_t check;
 
-	_checksum_suffix(buf.data(), EC_PUBKEY_SIZE, "K1", check);
+	_checksum_suffix(buf.data(), EC_PUBKEY_SIZE, check);
 
 	if (memcmp(buf.data() + EC_PUBKEY_SIZE, check, CHECKSUM_SIZE)) {
 		return false;
@@ -69,7 +70,7 @@ bool pub_decoder_k1(const std::vector<unsigned char>& buf, ec_pubkey_t& key) {
 size_t priv_encoder_k1(const ec_privkey_t& priv, unsigned char *buf) {
 	checksum_t check;
 
-	_checksum_suffix(priv.data(), EC_PRIVKEY_SIZE, "K1", check);
+	_checksum_suffix(priv.data(), EC_PRIVKEY_SIZE, check);
 
 	memcpy(buf, priv.data(), priv.size());
 	memcpy(buf + EC_PRIVKEY_SIZE, check, CHECKSUM_SIZE);
@@ -84,7 +85,7 @@ bool priv_decoder_k1(const std::vector<unsigned char>& buf, ec_privkey_t& priv) 
 	}
 
 	checksum_t check;
-	_checksum_suffix(buf.data(), EC_PRIVKEY_SIZE, "K1", check);
+	_checksum_suffix(buf.data(), EC_PRIVKEY_SIZE, check);
 	if (memcmp(buf.data() + EC_PRIVKEY_SIZE, check, CHECKSUM_SIZE)) {
 		return false;
 	}
@@ -97,7 +98,7 @@ void sig_encoder_k1(const ec_signature_t& sig, unsigned char *buf) {
 
 	checksum_t check;
 
-	_checksum_suffix(sig.data(), EC_SIGNATURE_SIZE, "K1", check);
+	_checksum_suffix(sig.data(), EC_SIGNATURE_SIZE, check);
 
 	memcpy(buf, sig.data(), sig.size());
 	memcpy(buf + EC_SIGNATURE_SIZE, check, CHECKSUM_SIZE);
@@ -112,7 +113,7 @@ bool sig_decoder_k1(const std::vector<unsigned char>& buf, ec_signature_t& sig) 
 	}
 
 	// Calculate checksum
-	_checksum_suffix(buf.data(), EC_SIGNATURE_SIZE, "K1", check);
+	_checksum_suffix(buf.data(), EC_SIGNATURE_SIZE, check);
 
 	// And validate
 	if (memcmp(buf.data() + EC_SIGNATURE_SIZE, check, CHECKSUM_SIZE)) {
