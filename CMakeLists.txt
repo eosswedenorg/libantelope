@@ -92,6 +92,9 @@ endif()
 include(OpenSSL)
 target_link_libraries( ${LIB_NAME} PRIVATE OpenSSL::Crypto)
 
+# Hash implementation
+set( LIBANTELOPE_HASHIMPL_OPENSSL 1 )
+
 # EC Implementation
 if (${EC_LIB} STREQUAL "libsecp256k1")
 	add_subdirectory( vendor/secp256k1 )
