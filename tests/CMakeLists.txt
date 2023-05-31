@@ -1,4 +1,6 @@
 
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/doctest.cmake)
+
 set(TEST_SRC
 	main.cpp
 
@@ -30,10 +32,7 @@ add_executable(doctest ${TEST_SRC})
 target_link_libraries(doctest PRIVATE ${LIB_NAME})
 target_include_directories(doctest PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include)
 
-add_test(
-	NAME doctest
-	COMMAND $<TARGET_FILE:doctest> -ni -fc
-)
+doctest_discover_tests(doctest)
 
 if (WITH_BENCHMARK)
 	add_subdirectory( benchmark )
