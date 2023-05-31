@@ -52,6 +52,9 @@ TEST_CASE("hash::ripemd160::init/update/final") {
 		const char *name;
 		std::vector<std::string> inputs;
 		libantelope::ripemd160_t expected;
+#ifdef _MSC_VER
+		char _; // ripemd160_t can't be last, wierd compiler bug on MSVC
+#endif
 	};
 
 	std::vector<testcase> tests = {

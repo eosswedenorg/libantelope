@@ -54,6 +54,9 @@ TEST_CASE("hash::sha256::sha256d") {
 		const char *name;
 		std::string input;
 		libantelope::sha256_t expected;
+#ifdef _MSC_VER
+		char _; // sha256_t can't be last, wierd compiler bug on MSVC
+#endif
 	};
 
 	std::vector<testcase> tests = {
@@ -106,6 +109,9 @@ TEST_CASE("hash::sha256::init/update/final") {
 		const char *name;
 		std::vector<std::string> inputs;
 		libantelope::sha256_t expected;
+#ifdef _MSC_VER
+		char _; // sha256_t can't be last, wierd compiler bug on MSVC
+#endif
 	};
 
 	std::vector<testcase> tests = {
