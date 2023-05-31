@@ -27,7 +27,7 @@
 
 namespace libantelope {
 
-int sha256_init(struct sha256_ctx* ctx) {
+int sha256_init(sha256_ctx_t* ctx) {
 	return SHA256_Init((SHA256_CTX*)ctx);
 }
 
