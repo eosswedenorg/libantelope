@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.15)
 
 # Project name and version
 project(libantelope
-	VERSION 0.2.0
+	VERSION 0.2.1
 	DESCRIPTION "C++ library for Antelope IO"
 	HOMEPAGE_URL "https://github.com/eosswedenorg/libantelope"
 	LANGUAGES C CXX
