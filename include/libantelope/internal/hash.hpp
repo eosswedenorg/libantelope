@@ -29,13 +29,10 @@
 
 #ifdef LIBANTELOPE_HASHIMPL_OPENSSL
 
-#include <openssl/sha.h>
-#include <openssl/ripemd.h>
-
 namespace libantelope { namespace internal {
 
-	typedef SHA256_CTX sha256_state;
-	typedef RIPEMD160_CTX ripemd160_state;
+	typedef unsigned char sha256_state[112];
+	typedef unsigned char ripemd160_state[96];
 } } // namespace libantelope::internal
 
 #else
