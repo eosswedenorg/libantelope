@@ -42,12 +42,17 @@
 
 static int fill_random(unsigned char* data, size_t size) {
 #if defined(_WIN32)
+/* Disable C4267 Warning (dataloss when casting variable to smaller size) temporarily */
+#pragma warning( push )
+#pragma warning( disable: 4267 )
     NTSTATUS res = BCryptGenRandom(NULL, data, size, BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+#pragma warning( pop )
     if (res != STATUS_SUCCESS || size > ULONG_MAX) {
         return 0;
     } else {
         return 1;
     }
+
 #elif defined(__linux__) || defined(__FreeBSD__)
     /* If `getrandom(2)` is not available you should fallback to /dev/urandom */
     ssize_t res = getrandom(data, size, 0);
