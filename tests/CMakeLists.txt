@@ -2,6 +2,10 @@
 set(TEST_SRC
 	main.cpp
 
+	# hash
+	hash/sha256.cpp
+	hash/ripemd160.cpp
+
 	# ec
 	ec/generate.cpp
 	ec/pubkey.cpp
