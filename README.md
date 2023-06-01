@@ -4,130 +4,107 @@
 
 # libantelope
 
-Independent C++ library for [Antelope IO](https://antelope.io) (former [libeosio](https://github.com/eosswedenorg/libeosio))
-
-NOTE: This repository has no connection to the official Antelope code.
+libantelope is an independent C++ library designed for Antelope IO (formerly known as libeosio). Please note that this repository is not affiliated with the official Antelope code.
 
 ## Compiling the library
 
-You will need `openssl` development files (version 1.1 or later) to compile and `cmake 3.15` or later to compile this project.
+To compile this project, you will need the following:
+
+- `openssl` development files (version 1.1 or later)
+- `cmake 3.15` or later
 
 ### Elliptic curve backend
 
-There is two different backend implementation for the elliptic curve part of the library:
+The library offers two different backend implementations for the elliptic curve functionality:
 
-* `OpenSSL` as mentioned before. however you still need to link to openssl even if it is not used as the EC backend
-  because more of the codebase uses it.
+- `libsecp256k1`
+- `OpenSSL`: Although the default is to use `libsecp256k1` for optimization, you still need to link to OpenSSL as other parts of the codebase rely on it.
 
-* `libsecp256k1`
-
-Default is to use `libsecp256k1` as it is more optimized.
-
-You can switch implementation by modifing the cmake variable `EC_LIB`.
+To switch the implementation, modify the `EC_LIB` variable in the cmake.
 
 ### CMake
 
-You can install `cmake` by reading the [official guide](https://cmake.org/install).
+You can install `cmake` by referring to the [official guide](https://cmake.org/install).
 
 ### Linux
 
-**NOTE:** Only Ubuntu `20.04` and `22.04` is officially supported.
+**NOTE:** Only Ubuntu versions `20.04` and `22.04` are officially supported.
 
-The project should compile fine on most versions/distros but it is only tested
-and distributed for Ubuntu `20.04` and `22.04` by [Sw/eden](https://www.eossweden.org).
+While the project should compile fine on most versions/distros, it is only tested and distributed for Ubuntu `20.04` and `22.04` by [Sw/eden](https://www.eossweden.org).
 
 #### Dependencies
 
-**Ubuntu (or other debian based distros)**
+**Ubuntu (or other Debian-based distros)**
 
-First you need to have a compiler, `openssl` and `cmake`. this can be installed with apt.
+To install the necessary dependencies (compiler, `openssl`, and `cmake`), use the following `apt` command:
 
 ```sh
-$ apt-get install gcc g++ cmake libssl-dev
+apt-get install gcc g++ cmake libssl-dev
 ```
-If you need a newer version of cmake then apt provides.
-Checkout the official [CMake APT repository](https://apt.kitware.com/).
+
+If you require a newer version of `cmake`, you can refer to the [official CMake APT repository](https://apt.kitware.com/).
 
 **Other**
 
-Consult your package manager's manual for getting `openssl`,`g++` and `cmake` installed.
-
-If you need a newer version of cmake then your package manager provides. checkout the [official guide](https://cmake.org/install).
+For other distros, please consult your package manager's manual to install `openssl`, `g++`, and `cmake`. If you need a newer version of `cmake`, you can follow the [official installation guide](https://cmake.org/install).
 
 ### MacOS
 
 #### Dependencies
 
-You must have a compiler installed. This project is known to build with `Xcode 11.0` but other versions should work.
+Ensure that you have a compiler installed. This project is known to build with `Xcode 11.0`, but other versions should work as well.
 
-You need to have openssl and cmake installed also, this can be done with this `brew` command:
+To install `openssl` and `cmake`, you can use the following `brew` command:
+
 ```sh
-$ brew install openssl cmake
+brew install openssl cmake
 ```
 
-If you need a newer version of cmake then brew provides. checkout the [official guide](https://cmake.org/install)
+If you require a newer version of `cmake`, refer to the [official installation guide](https://cmake.org/install).
 
 #### Build
 
 ```sh
-$ mkdir build && cd build
-$ cmake .. && make
+mkdir build && cd build
+cmake .. && make
 ```
 
-**MacOS:** You may need to point `cmake` to `openssl` by passing the argument
-`-D OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1` if openssl is not under `/usr/local/opt/openssl@1.1` you need to find the correct path.
+**MacOS:** If your `openssl` installation is not located at `/usr/local/opt/openssl@1.1`, you may need to pass the argument `-D OPENSSL_ROOT_DIR=/path/to/openssl` to `cmake` and specify the correct path.
 
 ### Windows
 
 #### Dependencies
 
-First you will need a compiler.
+First, ensure that you have a compiler installed.
 
-[Build Tools for Visual Studio 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16) (Selecting C++ during installation) is recommended.
+It is recommended to use [Build Tools for Visual Studio 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16) and select C++ during installation.
 
-By default `cmake` will use the bundled openssl package located at `vendor/openssl-1.1.1e-win-static.zip`
+By default, `cmake` will utilize the bundled OpenSSL package located at `vendor/openssl-1.1.1e-win-static.zip`. If you prefer to use a different version of OpenSSL, set the `OPENSSL_ROOT_DIR` to the directory where OpenSSL is located on your system:
 
-If you like to use an other version of OpenSSL then the static one bundled with this repo
-you need to set `OPENSSL_ROOT_DIR` to the directory where OpenSSL is located on the system.
-
-For example:
-
-```
-C:\repo> cmake -D OPENSSL_ROOT_DIR=C:/path/to/openssl -B build
+```sh
+cmake -D OPENSSL_ROOT_DIR=C:/path/to/openssl -B build
 ```
 
-**NOTE:** `cmake` uses forward slash `/` for path even for windows. so make sure you use that when setting `OPENSSL_ROOT_DIR`
+**NOTE:** `cmake` uses forward slashes `/` for paths, even on Windows, so ensure that you use them when setting
 
-#### Build.
+ `OPENSSL_ROOT_DIR`.
 
-Run cmake
+#### Build
 
+Run `cmake`:
+
+```sh
+cmake -B build
+cmake --build build --config Release
 ```
-C:\repo> cmake -B build
-C:\repo> cmake --build build --config Release
-```
 
-## Security notice
+## Security Notice
 
-Elliptic curve crypthographic operations is done using either `OpenSSL` or `libsecp256k1` libraries.
-This library (libantelope) will never expose sensitve cryptographic information
-to anything but the computers memory.
-You are free to inspect the source code and compile yourself to verify.
+The library performs elliptic curve cryptographic operations using either the `OpenSSL` or `libsecp256k1` libraries. The `libantelope` library ensures that sensitive cryptographic information is only stored in computer memory and not exposed to external sources. You are encouraged to inspect the source code and compile it yourself for verification purposes.
 
-However, use this at your own risk. we cannot guarantee that the keys are
-cryptographically secure as this depends on the elliptic curve
-implementation (alto both OpenSSL and libsecp256k1 are widely used and should be safe)
+However, please use this library at your own risk. While both OpenSSL and libsecp256k1 are widely used and considered safe, we cannot guarantee the cryptographic security of the keys as it depends on the elliptic curve implementation.
 
-Please read the `LICENSE` file.
-
-```
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
-PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
-OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-```
+Please refer to the `LICENSE` file for more information.
 
 ## Author
 
