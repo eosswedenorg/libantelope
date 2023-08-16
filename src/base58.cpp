@@ -25,6 +25,7 @@
  * Based on code from https://github.com/bitcoin/bitcoin/blob/f1e2f2a85962c1664e4e55471061af0eaa798d40/src/base58.cpp
  */
 #include <algorithm>
+#include <cstdint>
 #include <cstddef>
 #include <cassert>
 #include <cstring>
